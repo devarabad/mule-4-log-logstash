@@ -1,0 +1,9 @@
+env: "dev"
+
+http:
+  port: "8081"
+
+elk:
+  logstash:
+    host: "localhost"
+    port: "9563"
