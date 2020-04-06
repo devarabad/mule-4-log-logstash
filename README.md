@@ -15,7 +15,13 @@ Mule 4 Logging to Logstash
 
 2. Import application in Anypoint Studio
 
-3. Run the application
+3. Run the application with the following arguments added
+```
+# See Anypoint Studio Run Configurations (Run -> Run Configurations -> Arguments)
+# Add the properties at the end
+VM Arguments:
+  -Dlogstash.host=localhost -Dlogstash.port=9563
+```
 
 ### View Logs in Kibana ###
 1. Open Kibana
