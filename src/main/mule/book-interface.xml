@@ -124,27 +124,18 @@ output application/json
         </error-handler>
     </flow>
     <flow name="put:\books\(id):application\json:book-api-config">
-        <flow-ref doc:name="Flow Reference" doc:id="99d17349-4c18-44c0-b6c8-2d576c7b645f" name="put-book"/>
+        <flow-ref doc:name="put-book" doc:id="99d17349-4c18-44c0-b6c8-2d576c7b645f" name="put-book"/>
     </flow>
     <flow name="delete:\books\(id):book-api-config">
-        <flow-ref doc:name="Flow Reference" doc:id="53230af8-03ab-4f63-9cfa-36b78aa4ca76" name="delete-book"/>
+        <flow-ref doc:name="delete-book" doc:id="53230af8-03ab-4f63-9cfa-36b78aa4ca76" name="delete-book"/>
     </flow>
-    <flow name="patch:\books\(id):application\json:book-api-config">
-        <flow-ref doc:name="Flow Reference" doc:id="c3ed9b1d-ccd1-4c64-9dcd-f3a0e8d9efdd" name="patch-book"/>
+    <flow name="patch:\books\(id):application\json:book-api-config" doc:id="a308cdbe-5684-448d-8046-efbe537ffb04">
+        <flow-ref doc:name="patch-book" doc:id="c3ed9b1d-ccd1-4c64-9dcd-f3a0e8d9efdd" name="patch-book"/>
     </flow>
     <flow name="get:\books\(id):book-api-config">
-        <flow-ref doc:name="Flow Reference" doc:id="cc647df5-0015-44e7-babd-7c2bdc4cb965" name="get-book"/>
+        <flow-ref doc:name="get-book" doc:id="cc647df5-0015-44e7-babd-7c2bdc4cb965" name="get-book"/>
     </flow>
-    <flow name="post:\books:application\json:book-api-config">
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "Book added (but not really)"
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+    <flow name="post:\books:application\json:book-api-config" doc:id="b9faf456-e9e4-4812-a94c-2513d0ddae34">
+    <flow-ref doc:name="post-book" doc:id="97d6ef5a-066e-4ead-a0d0-06c9dfa78876" name="post-book" />
     </flow>
 </mule>
