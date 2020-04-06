@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Configuration  name="cloudhub" 
-                packages="com.mulesoft.ch.logging.appender">
+<Configuration packages="com.mulesoft.ch.logging.appender">
 
   <Appenders>
-    <RollingFile  name="FILE"
+    <RollingFile  name="file"
                   fileName="${sys:mule.home}${sys:file.separator}logs${sys:file.separator}mule-4-log-logstash.log"
                   filePattern="${sys:mule.home}${sys:file.separator}logs${sys:file.separator}mule-4-log-logstash-%i.log">
                   
       <PatternLayout pattern="%-5p %d [%t] [event: %X{correlationId}] %c: %m%n" />
-      <SizeBasedTriggeringPolicy size="10 MB" />
       <DefaultRolloverStrategy max="10" />
+      <Policies>
+        <SizeBasedTriggeringPolicy size="10 MB" />
+      </Policies>
     </RollingFile>
-    
-    <Log4J2CloudhubLogAppender  name="CLOUDHUB"
+
+    <Log4J2CloudhubLogAppender  name="cloudhub"
                                 addressProvider="com.mulesoft.ch.logging.DefaultAggregatorAddressProvider"
                                 applicationContext="com.mulesoft.ch.logging.DefaultApplicationContext"
                                 appendRetryIntervalMs="${sys:logging.appendRetryInterval}"
@@ -31,38 +32,32 @@
 
       <PatternLayout pattern="[%d{MM-dd HH:mm:ss}] %-5p %c{1} [%t]: %m%n"/>
     </Log4J2CloudhubLogAppender>
-    
-    <Socket name="SOCKET" 
-            host="${elk.logstash.host}" 
-            port="${elk.logstash.port}">
+
+    <Socket name="socket" 
+            protocol="tcp"
+            host="${sys:logstash.host}" 
+            port="${sys:logstash.port}">
+            
       <JsonLayout compact="true" eventEol="true">
-        <KeyValuePair key="log_type" value="production"/>
+        <KeyValuePair key="log_type" value="nonproduction"/>
       </JsonLayout>
-      <!-- <PatternLayout pattern="{&quot;log_timestamp&quot;:&quot;%d&quot; ,&quot;log_thread&quot;:&quot;[%t]&quot; , &quot;log_level&quot;:&quot;%-5p&quot; , %m}%n" /> -->
     </Socket>
   </Appenders>
 
   <Loggers>
-    <AsyncRoot level="DEBUG">
-      <AppenderRef ref="FILE" />
-      <AppenderRef ref="CLOUDHUB" />
-      <AppenderRef ref="SOCKET"/>
+    <AsyncRoot level="INFO">
+      <AppenderRef ref="file" />
+      <AppenderRef ref="cloudhub" />
+      <AppenderRef ref="socket"/>
     </AsyncRoot>
     
     <!-- Http Logger shows wire traffic on DEBUG. -->
     <!--AsyncLogger name="org.mule.service.http.impl.service.HttpMessageLogger" level="DEBUG" / -->
-    <AsyncLogger
-      name="org.mule.service.http"
-      level="WARN" />
-      
-    <AsyncLogger
-      name="org.mule.extension.http"
-      level="WARN" />
+    <AsyncLogger name="org.mule.service.http" level="WARN" />
+    <AsyncLogger name="org.mule.extension.http" level="WARN" />
 
     <!-- Mule logger -->
-    <AsyncLogger
-      name="org.mule.runtime.core.internal.processor.LoggerMessageProcessor"
-      level="INFO" />
+    <AsyncLogger name="org.mule.runtime.core.internal.processor.LoggerMessageProcessor" level="INFO" />
       
     <AsyncLogger name="com.gigaspaces" level="ERROR"/>
     <AsyncLogger name="com.j_spaces" level="ERROR"/>
