@@ -37,7 +37,7 @@ output application/json
 output application/json
 ---
 {
-  message: "Book added but not really"
+  message: "Book added (but not really)"
 }]]></ee:set-payload>
       </ee:message>
     </ee:transform>
