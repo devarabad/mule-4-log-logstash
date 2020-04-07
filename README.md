@@ -31,12 +31,13 @@ VM Arguments:
 
 3. Go to Settings and add a Log Index
   - Add the ff:
-    - logstash-*
-    - nprod-*
-    - prod-*
+    - logstash*
+    - nprod*
+    - prod*
+    - unknown*
 ```
 Eg. 
-  filebeat-*,kibana_sample_data_logs*,logstash-*,nprod-*,prod-*
+  filebeat-*,kibana_sample_data_logs*,logstash*,nprod*,prod*,unknown*
 ```
 
 4. Apply the settings
