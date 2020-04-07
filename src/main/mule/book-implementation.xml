@@ -9,7 +9,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
     <set-variable value="#[message.attributes.uriParams.'id']" doc:name="Set bookId" doc:id="e3aa01e9-c490-4428-bbab-b62adde0cc42" variableName="bookId" />
   </sub-flow>
   <flow name="get-book" doc:id="0efec871-f0bc-4454-aeab-be4f1c62ded4" >
-    <logger level="INFO" doc:name="Log Start" doc:id="c650f526-111b-48fa-986a-0a7c8a60e7c5" category="start" message="#[${file::mappings/logs/map-input-log-json.dwl}]"/>
+    <logger level="INFO" doc:name="Log Start" doc:id="c650f526-111b-48fa-986a-0a7c8a60e7c5" category="get-book.start" message="#[${file::mappings/logs/map-input-log-json.dwl}]"/>
     <flow-ref doc:name="set-bookId" doc:id="f5fea1bd-4a4e-4d5a-974c-0cc701a8e80c" name="set-bookId"/>
     <ee:transform doc:name="JSON Message" doc:id="986ef76b-f605-4a99-8ce1-e36c3b4a6410" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
       <ee:message >
@@ -27,10 +27,10 @@ output application/json
 }]]></ee:set-payload>
       </ee:message>
     </ee:transform>
-    <logger level="INFO" doc:name="Log End" doc:id="c1d8247d-8bc4-4538-917c-565f11f30ebf" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="end"/>
+    <logger level="INFO" doc:name="Log End" doc:id="c1d8247d-8bc4-4538-917c-565f11f30ebf" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="get-book.end"/>
   </flow>
   <flow name="post-book" doc:id="37a8ba97-1cf0-4e38-9c8d-494b02f24c93" >
-    <logger level="INFO" doc:name="Logger" doc:id="ba234d1b-1414-4e1b-8646-13781f8bd10e" message="#[${file::mappings/logs/map-input-log-json.dwl}]" category="start"/>
+    <logger level="INFO" doc:name="Logger" doc:id="ba234d1b-1414-4e1b-8646-13781f8bd10e" message="#[${file::mappings/logs/map-input-log-json.dwl}]" category="post-book.start"/>
     <ee:transform doc:name="JSON Message" doc:id="f2de9c13-708f-4917-9c35-b3f097fe4326" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
       <ee:message >
         <ee:set-payload ><![CDATA[%dw 2.0
@@ -41,10 +41,10 @@ output application/json
 }]]></ee:set-payload>
       </ee:message>
     </ee:transform>
-    <logger level="INFO" doc:name="Log End" doc:id="cb3f8122-47e1-479f-893b-51683595c836" message="#[${file::mappings/logs/map-input-log-json.dwl}]" category="end" />
+    <logger level="INFO" doc:name="Log End" doc:id="cb3f8122-47e1-479f-893b-51683595c836" message="#[${file::mappings/logs/map-input-log-json.dwl}]" category="post-book.end" />
   </flow>
   <flow name="put-book" doc:id="6136e00d-e5bb-455b-b9bd-7bb78a49ccfb" >
-    <logger level="INFO" doc:name="Log Start" doc:id="d573e820-a85a-4c23-b321-030acbafb54f" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="start" />
+    <logger level="INFO" doc:name="Log Start" doc:id="d573e820-a85a-4c23-b321-030acbafb54f" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="put-book.start" />
     <flow-ref doc:name="set-bookId" doc:id="bac3e1f2-b939-48ab-a92d-e7c7d8261204" name="set-bookId" />
     <ee:transform doc:name="JSON Message" doc:id="32f0b50e-2ddc-4cfe-b4d2-4001ff96016d" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
       <ee:message >
@@ -56,10 +56,10 @@ output application/json
 }]]></ee:set-payload>
       </ee:message>
     </ee:transform>
-    <logger level="INFO" doc:name="Log End" doc:id="65d9c184-414c-49ab-8bf6-d9b949283657" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="end" />
+    <logger level="INFO" doc:name="Log End" doc:id="65d9c184-414c-49ab-8bf6-d9b949283657" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="put-book.end" />
   </flow>
   <flow name="patch-book" doc:id="712c1025-db12-44a1-85cb-b7c33af8f714" >
-    <logger level="INFO" doc:name="Log Start" doc:id="e57526c9-4e07-41c2-877a-dcfad39ed350" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="start" />
+    <logger level="INFO" doc:name="Log Start" doc:id="e57526c9-4e07-41c2-877a-dcfad39ed350" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="patch-book.start" />
     <flow-ref doc:name="set-bookId" doc:id="35cd2e19-2b0f-4f95-b86a-2b80a026b979" name="set-bookId" />
     <ee:transform doc:name="JSON Message" doc:id="ec6178e5-b318-4894-9842-5df9be6475e3" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
       <ee:message >
@@ -71,10 +71,10 @@ output application/json
 }]]></ee:set-payload>
       </ee:message>
     </ee:transform>
-    <logger level="INFO" doc:name="Log End" doc:id="f16a1a1d-d800-48c0-8bc2-48a040f1fa59" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="end" />
+    <logger level="INFO" doc:name="Log End" doc:id="f16a1a1d-d800-48c0-8bc2-48a040f1fa59" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="patch-book.end" />
   </flow>
   <flow name="delete-book" doc:id="0f503002-54ab-4710-8726-22c611ed74c9" >
-    <logger level="INFO" doc:name="Log Start" doc:id="91f64edd-6090-4436-bc4e-180eafbe3fac" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="start" />
+    <logger level="INFO" doc:name="Log Start" doc:id="91f64edd-6090-4436-bc4e-180eafbe3fac" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="delete-book.start" />
     <flow-ref doc:name="set-bookId" doc:id="b0e74f43-1205-4a76-b90c-6a6e3b1fa6a0" name="set-bookId" />
     <ee:transform doc:name="JSON Message" doc:id="77b39ce9-5a5c-4c67-9735-edf29ac17d95" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
       <ee:message >
@@ -86,6 +86,6 @@ output application/json
 }]]></ee:set-payload>
       </ee:message>
     </ee:transform>
-    <logger level="INFO" doc:name="Log End" doc:id="ae66cf92-cce6-4847-8fa7-da1c6e356057" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="end" />
+    <logger level="INFO" doc:name="Log End" doc:id="ae66cf92-cce6-4847-8fa7-da1c6e356057" message='#[${file::mappings/logs/map-input-log-json.dwl}]' category="delete-book.end" />
   </flow>
 </mule>
