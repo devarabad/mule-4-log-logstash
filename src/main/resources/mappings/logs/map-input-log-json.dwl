@@ -7,5 +7,6 @@ output application/json
   correlationId: correlationId,
   errorId: error.description,
   errorType: error.errorType,
-  message: message
+  attributes: attributes,
+  payload: payload
 }
